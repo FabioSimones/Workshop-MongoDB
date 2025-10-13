@@ -51,4 +51,7 @@ public class User {
     }
 
 
+    public List<Post> getPosts() {
+        return posts;
+    }
 }
