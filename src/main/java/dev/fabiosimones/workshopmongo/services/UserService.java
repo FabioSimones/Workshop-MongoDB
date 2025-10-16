@@ -1,6 +1,8 @@
 package dev.fabiosimones.workshopmongo.services;
 
+import dev.fabiosimones.workshopmongo.models.dto.PostDTO;
 import dev.fabiosimones.workshopmongo.models.dto.UserDTO;
+import dev.fabiosimones.workshopmongo.models.entities.Post;
 import dev.fabiosimones.workshopmongo.models.entities.User;
 import dev.fabiosimones.workshopmongo.repositories.UserRepository;
 import dev.fabiosimones.workshopmongo.services.exceptions.ResourceNotFoundException;
@@ -46,6 +48,11 @@ public class UserService {
     public void delete(String id){
         getEntityById(id);
         repository.deleteById(id);
+    }
+
+    public List<PostDTO> getUserPosts(String id){
+        User user = getEntityById(id);
+        return user.getPosts().stream().map(x -> new PostDTO(x)).collect(Collectors.toList());
     }
 
     private User getEntityById(String id){
